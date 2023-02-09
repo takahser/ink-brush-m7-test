@@ -2,8 +2,8 @@
 #![feature(min_specialization)]
 
 #[openbrush::contract]
-#[cfg(test)]
 mod staking_contract {
+    use ink::prelude::vec::*;
     use openbrush::contracts::psp22::*;
     use openbrush::traits::Storage;
     use openbrush::test_utils::*;
