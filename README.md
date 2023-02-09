@@ -5,83 +5,46 @@ ink brush staking contract, following this tutorial: https://www.youtube.com/wat
 ## Build Instructions
 
 ```bash
-cargo contract build
+~/contracts % cargo contract build
 ```
 
-**Currently, this command fails with the following error:**
+**Currently fails with:**
 
 ```bash
-error[E0277]: the trait bound `openbrush::openbrush_contracts::psp22::Data: TypeInfo` is not satisfied
-   --> /Users/xxx/repos/ink-brush-test/staking_contract/contracts/lib.rs:13:16
-    |
-13  |         psp22: psp22::Data
-    |                ^^^^^^^^^^^ the trait `TypeInfo` is not implemented for `openbrush::openbrush_contracts::psp22::Data`
-    |
-    = help: the following other types implement trait `TypeInfo`:
-              &T
-              &mut T
-              ()
-              (A, B)
-              (A, B, C)
-              (A, B, C, D)
-              (A, B, C, D, E)
-              (A, B, C, D, E, F)
-            and 65 others
-note: required by a bound in `FieldBuilder::<MetaForm, N>::ty`
-   --> /Users/xxx/.cargo/registry/src/github.com-1ecc6299db9ec823/scale-info-2.3.1/src/build.rs:458:13
-    |
-458 |         TY: TypeInfo + 'static + ?Sized,
-    |             ^^^^^^^^ required by this bound in `FieldBuilder::<MetaForm, N>::ty`
+~/contracts % cargo contract build
+warning: nothing to print.
 
-error[E0277]: the trait bound `openbrush::openbrush_contracts::psp22::Data: StorageLayout` is not satisfied
-  --> /Users/xxx/repos/ink-brush-test/staking_contract/contracts/lib.rs:10:5
-   |
-10 | /     #[derive(Storage, Default)]
-11 | |     pub struct StakingContract {
-12 | |         #[storage_field]
-13 | |         psp22: psp22::Data
-14 | |     }
-   | |_____^ the trait `StorageLayout` is not implemented for `openbrush::openbrush_contracts::psp22::Data`
-   |
-   = help: the following other types implement trait `StorageLayout`:
-             ()
-             (A, B)
-             (A, B, C)
-             (A, B, C, D)
-             (A, B, C, D, E)
-             (A, B, C, D, E, F)
-             (A, B, C, D, E, F, G)
-             (A, B, C, D, E, F, G, H)
-           and 62 others
-   = note: this error originates in the derive macro `::ink::storage::traits::StorageLayout` (in Nightly builds, run with -Z macro-backtrace for more info)
+To find dependencies that require specific target platforms, try to use option `--target all` first, and then narrow your search scope accordingly.
+ [1/5] Building cargo project
+    Updating git repository `https://github.com/paritytech/ink`
+    Updating git repository `https://github.com/727-Ventures/openbrush-contracts`
+    Updating crates.io index
+    Updating git repository `https://github.com/727-ventures/pallet-assets-chain-extension`
+    Updating git repository `https://github.com/727-Ventures/obce`
+   Compiling staking_contract v0.1.0 (/private/var/folders/9y/ny58jn152dzcqf036v5cb4nh0000gn/T/cargo-contract_nsgIzw)
+error: `#[panic_handler]` function required, but not found
 
-error[E0277]: the trait bound `openbrush::openbrush_contracts::psp22::PSP22Error: TypeInfo` is not satisfied
-    --> /Users/xxx/repos/ink-brush-test/staking_contract/contracts/lib.rs:4:1
-     |
-4    | #[openbrush::contract]
-     | ^^^^^^^^^^^^^^^^^^^^^^ the trait `TypeInfo` is not implemented for `openbrush::openbrush_contracts::psp22::PSP22Error`
-     |
-     = help: the following other types implement trait `TypeInfo`:
-               &T
-               &mut T
-               ()
-               (A, B)
-               (A, B, C)
-               (A, B, C, D)
-               (A, B, C, D, E)
-               (A, B, C, D, E, F)
-             and 65 others
-     = note: required for `Result<(), openbrush::openbrush_contracts::psp22::PSP22Error>` to implement `TypeInfo`
-     = note: 1 redundant requirement hidden
-     = note: required for `Result<Result<(), openbrush::openbrush_contracts::psp22::PSP22Error>, LangError>` to implement `TypeInfo`
-note: required by a bound in `TypeSpec::with_name_segs`
-    --> /Users/xxx/.cargo/git/checkouts/ink-1add513eda8f5a89/4655a8b/crates/metadata/src/specs.rs:1004:12
-     |
-1004 |         T: TypeInfo + 'static,
-     |            ^^^^^^^^ required by this bound in `TypeSpec::with_name_segs`
-     = note: this error originates in the attribute macro `::ink::contract` (in Nightly builds, run with -Z macro-backtrace for more info)
+error: could not compile `staking_contract` due to previous error
+ERROR: `"/Users/xxx/.rustup/toolchains/nightly-aarch64-apple-darwin/bin/cargo" "build" "--target=wasm32-unknown-unknown" "-Zbuild-std" "--no-default-features" "--release" "--target-dir=/Users/xxx/repos/ink-brush-test/staking_contract/contracts/target/ink" "--features" "ink/ink-debug"` failed with exit code: Some(101)
+```
 
-For more information about this error, try `rustc --explain E0277`.
-error: could not compile `staking_contract` due to 3 previous errors
-ERROR: `"/Users/xxx/.rustup/toolchains/nightly-aarch64-apple-darwin/bin/cargo" "run" "--package" "metadata-gen" "--manifest-path=/private/var/folders/9y/ny58jn152dzcqf036v5cb4nh0000gn/T/cargo-contract_0KzP2j/Cargo.toml" "--target-dir=/Users/xxx/repos/ink-brush-test/staking_contract/contracts/target/ink" "--release" ""` failed with exit code: Some(101)
+## Test instructions
+
+```bash
+~/contracts % cargo contract test
+```
+
+**Currently succeeds:**
+
+```bash
+~/contracts % cargo contract test 
+ [1/1] Running tests
+    Finished test [unoptimized + debuginfo] target(s) in 0.17s
+     Running unittests lib.rs (target/debug/deps/staking_contract-e44a0ac9c40d5b65)
+
+running 2 tests
+test staking_contract::tests::constructor_works ... ok
+test staking_contract::tests::transfer_works ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 ```
