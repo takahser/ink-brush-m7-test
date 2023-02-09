@@ -2,6 +2,7 @@
 #![feature(min_specialization)]
 
 #[openbrush::contract]
+#[cfg(test)]
 mod staking_contract {
     use openbrush::contracts::psp22::*;
     use openbrush::traits::Storage;
