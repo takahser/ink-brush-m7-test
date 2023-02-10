@@ -8,7 +8,7 @@ ink brush staking contract, following this tutorial: https://www.youtube.com/wat
 ~/contracts % cargo contract build
 ```
 
-**Currently fails with:**
+**Currently passes:**
 
 ```bash
 ~/contracts % cargo contract build
@@ -21,11 +21,32 @@ To find dependencies that require specific target platforms, try to use option `
     Updating crates.io index
     Updating git repository `https://github.com/727-ventures/pallet-assets-chain-extension`
     Updating git repository `https://github.com/727-Ventures/obce`
-   Compiling staking_contract v0.1.0 (/private/var/folders/9y/ny58jn152dzcqf036v5cb4nh0000gn/T/cargo-contract_nsgIzw)
-error: `#[panic_handler]` function required, but not found
+   Compiling staking_contract v0.1.0 (/private/var/folders/9y/ny58jn152dzcqf036v5cb4nh0000gn/T/cargo-contract_7uRWFZ)
+    Finished release [optimized] target(s) in 1.22s
+ [2/5] Post processing wasm file
+ [3/5] Optimizing wasm file
+ [4/5] Generating metadata
+    Updating git repository `https://github.com/paritytech/ink`
+    Updating crates.io index
+    Updating git repository `https://github.com/727-Ventures/openbrush-contracts`
+    Updating git repository `https://github.com/727-ventures/pallet-assets-chain-extension`
+    Updating git repository `https://github.com/727-Ventures/obce`
+   Compiling staking_contract v0.1.0 (/private/var/folders/9y/ny58jn152dzcqf036v5cb4nh0000gn/T/cargo-contract_4kUL1x)
+   Compiling metadata-gen v0.1.0 (/private/var/folders/9y/ny58jn152dzcqf036v5cb4nh0000gn/T/cargo-contract_4kUL1x/.ink/metadata_gen)
+    Finished release [optimized] target(s) in 1.95s
+     Running `target/ink/release/metadata-gen ''`
+ [5/5] Generating bundle
 
-error: could not compile `staking_contract` due to previous error
-ERROR: `"/Users/xxx/.rustup/toolchains/nightly-aarch64-apple-darwin/bin/cargo" "build" "--target=wasm32-unknown-unknown" "-Zbuild-std" "--no-default-features" "--release" "--target-dir=/Users/xxx/repos/ink-brush-test/staking_contract/contracts/target/ink" "--features" "ink/ink-debug"` failed with exit code: Some(101)
+Original wasm size: 53.9K, Optimized: 24.3K
+
+The contract was built in DEBUG mode.
+
+Your contract artifacts are ready. You can find them in:
+/Users/xxx/repos/ink-brush-test/staking_contract/contracts/target/ink
+
+  - staking_contract.contract (code + metadata)
+  - staking_contract.wasm (the contract's code)
+  - metadata.json (the contract's metadata)
 ```
 
 ## Test instructions
