@@ -6,7 +6,6 @@ mod staking_contract {
     use ink::prelude::vec::*;
     use openbrush::contracts::psp22::*;
     use openbrush::traits::Storage;
-    use openbrush::test_utils::*;
 
     #[ink(storage)]
     #[derive(Storage, Default)]
@@ -47,6 +46,7 @@ mod staking_contract {
     mod tests {
         /// Imports all the definitions from the outer scope so we can use them here.
         use super::*;
+        use openbrush::test_utils::*;
 
         #[ink::test]
         fn constructor_works() {
